@@ -1,0 +1,71 @@
+:root {
+  --main-green: #3a7d4f;
+  --main-orange: #d25832;
+  --main-blue: #305db8;
+}
+
+body {
+  background-image: url("/assets/images/background-2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+button:focus {
+  outline: none;
+}
+
+div.container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.questionaire {
+  background: var(--main-orange);
+  border: 4px solid black;
+  padding: 12px 28px;
+  color: white;
+  width: 50%;
+}
+@media screen and (max-width:768px){
+  .questionaire {
+    width: 75%;
+  }
+}
+@media screen and (max-width:600px){
+  .questionaire {
+    width: 100%;
+  }
+}
+
+.questionaire > div {
+  background: var(--main-green);
+  border: 4px solid black;
+  padding: 48px 8px;
+}
+
+.questionaire label {
+  font-size: 24px;
+  font-weight: 900;
+  width: 90%;
+}
+
+.questionaire input {
+  border: 1px solid black;
+  outline: none;
+  width: 90%;
+}
+
+.questionaire button {
+  border: 1px solid black;
+  background: var(--main-blue);
+  color: white;
+}
