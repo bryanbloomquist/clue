@@ -9,43 +9,47 @@ let count = 0;
 let q = 0;
 
 const game = (x,y) => {
-  $("#notepad").empty();
-  $("#notepad").append(`
+  const backward = `
     <div class="questionaire animate__animated animate__fadeIn${y}Big">
       <div class="row">
         <div class="col-1 center"><button onClick="goBack()"><i class="fas fa-backward"></i></button></div>
-        <div class="col-10 center text-center">
-  `);
+        <div class="col-10 center text-center">`;
+  const forward = `
+        </div>
+        <div class="col-1 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
+      </div>
+    </div>`;
+  $("#notepad").empty();
   if (x===0){
     $("#notepad").addClass("center");
     $("#notepad").append(`
-      <label for="userInput">What is your name?</label>
-      <input type="text" id="userInput" />
+      ${backward}
+        <label for="userInput">What is your name?</label>
+        <input type="text" id="userInput" />
+      ${forward}
     `);
     $(".questionaire > .row > div").first().empty();
   } else if (x===1) {
     $("#notepad").append(`
-      <label for="userInput">${playerOne}, how many people are playing?</label>
-      <select id="userInput" >
-        <option value="2">2</option>
-        <option value="3" selected="selected">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-      </select>
+      ${backward}
+        <label for="userInput">${playerOne}, how many people are playing?</label>
+        <select id="userInput" >
+          <option value="2">2</option>
+          <option value="3" selected="selected">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      ${forward}
     `);  
   } else if (x >= 2 && x <= 6 ) {
     $("#notepad").append(`
-      <label for="userInput">What is player ${x}'s name?</label>
-      <input type="text" id="userInput" />
+      ${backward}
+        <label for="userInput">What is player ${x}'s name?</label>
+        <input type="text" id="userInput" />
+      ${forward}
     `);  
   }
-  $("#notepad").append(`
-        </div>
-        <div class="col-1 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
-      </div>
-    </div>
-  `)
   $("#userInput").keyup(e => {
     if (e.keyCode===13) {
       e.preventDefault();
