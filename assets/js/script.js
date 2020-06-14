@@ -1,68 +1,51 @@
-let p0 = "";
-let p1 = "";
-let p2 = "";
-let p3 = "";
-let p4 = "";
-let p5 = "";
-let num = 0;
+const players = [];
+let playerOne = "";
+let playerTwo = "";
+let playerThree = "";
+let playerFour = "";
+let playerFive = "";
+let playerSix = "";
+let count = 0;
 let q = 0;
 
 const game = (x,y) => {
   $("#notepad").empty();
-  // const questionaire = `<div class="questionaire animate__animated animate__fadeIn${y}Big"></div>`;
-  // const row = `<div class="row"></div>`;
-  // const col = `<div class="col-10 center text-center"></div>`;
-  const backward = `<div class="col-1 center"><button onClick="goBack()"><i class="fas fa-backward"></i></button></div>`;
-  const forward = `<div class="col-1 center"><button id="qBtn" onClick="q${x+1}('userInput')"><i class="fas fa-forward"></i></button></div>`;
+  $("#notepad").append(`
+    <div class="questionaire animate__animated animate__fadeIn${y}Big">
+      <div class="row">
+        <div class="col-1 center"><button onClick="goBack()"><i class="fas fa-backward"></i></button></div>
+        <div class="col-10 center text-center">
+  `);
   if (x===0){
     $("#notepad").addClass("center");
     $("#notepad").append(`
-      <div class="questionaire animate__animated animate__fadeIn${y}Big">
-        <div class="row">
-          <div class="col-1 center"></div>
-          <div class="col-10 center text-center">
-            <label for="userInput">What is your name?</label>
-            <input type="text" id="userInput" />
-          </div>
-          ${forward}
-        </div>
-      </div>
+      <label for="userInput">What is your name?</label>
+      <input type="text" id="userInput" />
     `);
-  } 
-  else if (x===1) {
+    $(".questionaire > .row > div").first().empty();
+  } else if (x===1) {
     $("#notepad").append(`
-      <div class="questionaire animate__animated animate__fadeIn${y}Big">
-        <div class="row">
-          ${backward}
-          <div class="col-10 center text-center">
-            <label for="userInput">${p0}, how many people are playing?</label>
-            <select id="userInput" >
-              <option value="2">2</option>
-              <option value="3" selected="selected">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-            </select>
-          </div>
-          ${forward}
-        </div>
-      </div>
+      <label for="userInput">${playerOne}, how many people are playing?</label>
+      <select id="userInput" >
+        <option value="2">2</option>
+        <option value="3" selected="selected">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    `);  
+  } else if (x >= 2 && x <= 6 ) {
+    $("#notepad").append(`
+      <label for="userInput">What is player ${x}'s name?</label>
+      <input type="text" id="userInput" />
     `);  
   }
-  else if (x >= 2 && x <= 6 ) {
-    $("#notepad").append(`
-      <div class="questionaire animate__animated animate__fadeIn${y}Big">
-        <div class="row">
-          ${backward}
-          <div class="col-10 center text-center">
-            <label for="userInput">What is player ${x}'s name?</label>
-            <input type="text" id="userInput" />
-          </div>
-          ${forward}
+  $("#notepad").append(`
         </div>
+        <div class="col-1 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
       </div>
-    `);  
-  }
+    </div>
+  `)
   $("#userInput").keyup(e => {
     if (e.keyCode===13) {
       e.preventDefault();
@@ -87,40 +70,41 @@ const goForward = () => {
   }, 500);
 }
 
-const q1 = x => {
-  p0 = $("#"+x).val();
-  p0 ? goForward() : null;
-}
-
-const q2 = x => {
-  num = parseInt($("#"+x).val());
-  num ? goForward() : null;
-}
-
-const q3 = x => {
-  p1 = $("#"+x).val();
-  (q !== num) ? goForward() : loadNotepad();
-}
-
-const q4 = x => {
-  p1 = $("#"+x).val();
-  (q !== num) ? goForward() : loadNotepad();
-}
-
-const q5 = x => {
-  p1 = $("#"+x).val();
-  (q !== num) ? goForward() : loadNotepad();
-}
-
-const q6 = x => {
-  p1 = $("#"+x).val();
-  (q !== num) ? goForward() : loadNotepad();
-}
-
-const q7 = x => {
-  p1 = $("#"+x).val();
-  (q !== num) ? goForward() : loadNotepad();
-}
+const questions = (num, input) => {
+  const data = $("#"+input).val();
+  switch (num) {
+    case 0:
+      playerOne = data;
+      playerOne ? goForward() : null;
+      break;
+    case 1:
+      count = parseInt(data);
+      count ? goForward() : null;
+      break;
+    case 2:
+      playerTwo = data;
+      playerTwo ? ((q !== count) ? goForward() : loadNotepad()) : null;
+      break;
+    case 3:
+      playerThree = data;
+      playerThree ? ((q !== count) ? goForward() : loadNotepad()) : null;
+      break;
+    case 4:
+      playerFour = data;
+      playerFour ? ((q !== count) ? goForward() : loadNotepad()) : null;
+      break;
+    case 5:
+      playerFive = data;
+      playerFive ? ((q !== count) ? goForward() : loadNotepad()) : null;
+      break;
+    case 6:
+      playerSix = data;
+      playerSix ? ((q !== count) ? goForward() : loadNotepad()) : null;
+      break;
+    default:
+      null;
+  }
+};
 
 const loadNotepad = () => {
   console.log("hi")
