@@ -16,6 +16,7 @@ body {
   background-image: url("/assets/images/background-2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 button:focus {
