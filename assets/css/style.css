@@ -2,6 +2,14 @@
   --main-green: #3a7d4f;
   --main-orange: #d25832;
   --main-blue: #305db8;
+  --main-tan: #af9272;
+  --main-white: #ebe1dc;
+  --main-mustard: #cbae45;
+  --main-plum: #4b2b50;
+  --main-mrgreen: #7a9358;
+  --main-peacock: #595f89;
+  --main-scarlet: #a8483a;
+  --main-white: #e6dfd5;
 }
 
 body {
@@ -15,7 +23,7 @@ button:focus {
 }
 
 div.container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   overflow: hidden;
 }
@@ -59,13 +67,98 @@ div.container {
 }
 
 .questionaire input {
-  border: 1px solid black;
+  border: 2px solid black;
   outline: none;
   width: 90%;
 }
 
 .questionaire button {
-  border: 1px solid black;
+  border: 2px solid black;
   background: var(--main-blue);
   color: white;
+}
+
+.notepad-container {
+  padding: 24px;
+  background-image: url("/assets/images/notepad.png");
+  background-size: contain;
+  background-repeat: repeat-y;
+}
+
+table {
+  background: var(--main-white);
+}
+
+td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 4px;
+  border: 2px solid var(--main-tan);
+  color: var(--main-tan);
+  font-family: 'Sedgwick Ave', cursive;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+td.heading {
+  font-family: 'Rakkas', cursive;
+  font-size: 1.5rem;
+  font-style: normal;
+}
+
+td.binding, td.notepad-foot {
+  border: none;
+}
+
+td button {
+  display: block;
+  margin: 0 auto;
+  width: 32px;
+  height: 32px;
+}
+
+.binding {
+  background-image: url(/assets/images/binding.png);
+  background-size: 100% 100%;
+  height: 120px;
+  border: none;
+  max-width: 100%;
+}
+
+.notepad-foot {
+  background-image: url(/assets/images/foot.png);
+  background-size: 100% 100%;
+  height: 160px;
+  border: none;
+  max-width: 100%;
+}
+
+.mustard {
+  border: 3px outset var(--main-mustard);
+}
+
+.plum {
+  border: 3px outset var(--main-plum);
+}
+
+.green {
+  border: 3px outset var(--main-mrgreen);
+}
+
+.peacock {
+  border: 3px outset var(--main-peacock);
+}
+
+.scarlet {
+  border: 3px outset var(--main-scarlet);
+}
+
+.white {
+  border: 3px outset var(--main-white);
+}
+
+.mustard:active, .plum:active, .green:active,
+.peacock:active, .scarlet:active, .white:active {
+  border-style: inset;
 }
