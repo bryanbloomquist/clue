@@ -7,7 +7,7 @@
   --main-mustard: #cbae45;
   --main-plum: #71399a;
   --main-mrgreen: #7a9358;
-  --main-peacock: #595f89;
+  --main-peacock: #4381f2;
   --main-scarlet: #a8483a;
   --main-mswhite: #ccccca;
 }
@@ -42,7 +42,7 @@ div.container {
   border: 4px solid black;
   padding: 12px 28px;
   color: white;
-  width: 50%;
+  width: 66%;
 }
 @media screen and (max-width:768px){
   .questionaire {
@@ -65,24 +65,59 @@ div.container {
   font-size: 24px;
   font-weight: 900;
   width: 90%;
+  text-shadow: 1px 1px black, -1px 1px black, 1px -1px black, -1px -1px black;
 }
 
 .radio {
   display: inline-flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
 }
 
-.questionaire input {
-  border: 2px solid black;
-  outline: none;
-  width: 90%;
+.radio label {
+  padding-left: 12px;
+}
+
+label[for="mustard"] {
+  color: var(--main-mustard);
+}
+
+label[for="plum"] {
+  color: var(--main-plum);
+}
+
+label[for="green"] {
+  color: var(--main-mrgreen);
+}
+
+label[for="peacock"] {
+  color: var(--main-peacock);
+}
+
+label[for="scarlet"] {
+  color: var(--main-scarlet);
+}
+
+label[for="white"] {
+  color: white;
 }
 
 .questionaire button {
   border: 2px solid black;
   background: var(--main-blue);
   color: white;
+  font-size: 18px;
+  height: 36px;
+  width: 36px;
+}
+
+.hidden {
+  display:none;
+}
+
+.questionaire p {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .notepad-container {
@@ -105,6 +140,10 @@ td {
   font-size: 1.25rem;
   font-style: italic;
   font-weight: 600;
+}
+
+td:first-child {
+  padding: 0 12px;
 }
 
 td.heading {

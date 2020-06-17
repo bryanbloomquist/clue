@@ -1,38 +1,37 @@
-const players = ["","","","","",""];
-const check = '<i class="fas fa-check"></i>';
-const question = '<i class="fas fa-question"></i>';
-const look = '<i class="fas fa-eye"></i>';
-let count = 0;
-let q = 0;
+const players = ["","","","","",""];  //array to assign players colors
+const check = '<i class="fas fa-check"></i>'; //font awesome check mark
+const question = '<i class="fas fa-question"></i>'; //font awesome question mark
+const look = '<i class="fas fa-eye"></i>'; //font awesome eyeball
+let count = 0; //variable to set number of players
+let q = 0; //variable to track which question to ask
 
 const game = (x,y) => {
-  const backward = `
+  //dynamic html variables to be written to the page
+  const backward = ` 
     <div class="questionaire animate__animated animate__fadeIn${y}Big">
       <div class="row">
-        <div class="col-1 center"><button onClick="goBack()"><i class="fas fa-backward"></i></button></div>
-        <div class="col-10 center text-center">
+        <div class="col-2 center"><button onClick="goBack()" id="backBtn"><i class="fas fa-backward"></i></button></div>
+        <div class="col-8 center text-center">
   `;
-  // const colors = `
-  //   <div class="radio"><input type="radio" id="mustard" name="userInput" value="mustard"><label for="mustard">Mustard</label></div>
-  //   <div class="radio"><input type="radio" id="plum" name="userInput" value="plum"><label for="plum">Plum</label></div>
-  //   <div class="radio"><input type="radio" id="green" name="userInput" value="green"><label for="green">Green</label></div>
-  //   <div class="radio"><input type="radio" id="peacock" name="userInput" value="peacock"><label for="peacock">Peacock</label></div>
-  //   <div class="radio"><input type="radio" id="scarlet" name="userInput" value="scarlet"><label for="scarlet">Scarlet</label></div>
-  //   <div class="radio"><input type="radio" id="white" name="userInput" value="white"><label for="white">White</label></div>
-  // `;
   const colors = `
-    <select id="userInput">
-      <option value="mustard">Mustard</option>
-      <option value="plum">Plum</option>
-      <option value="green">Green</option>
-      <option value="peacock">Peacock</option>
-      <option value="scarlet">Scarlet</option>
-      <option value="white">White</option>
-    </select>
+    <div class="radio"><input type="radio" id="mustard" name="userInput" value="mustard"><label for="mustard">Mustard</label></div>
+    <div class="radio"><input type="radio" id="plum" name="userInput" value="plum"><label for="plum">Plum</label></div>
+    <div class="radio"><input type="radio" id="green" name="userInput" value="green"><label for="green">Green</label></div>
+    <div class="radio"><input type="radio" id="peacock" name="userInput" value="peacock"><label for="peacock">Peacock</label></div>
+    <div class="radio"><input type="radio" id="scarlet" name="userInput" value="scarlet"><label for="scarlet">Scarlet</label></div>
+    <div class="radio"><input type="radio" id="white" name="userInput" value="white"><label for="white">White</label></div>
+  `;
+  const playerCount = `
+    <div class="radio"><input type="radio" id="two" name="userInput" value=2><label for="two">2</label></div>
+    <div class="radio"><input type="radio" id="three" name="userInput" value=3><label for="three">3</label></div>
+    <div class="radio"><input type="radio" id="four" name="userInput" value=4><label for="four">4</label></div>
+    <div class="radio"><input type="radio" id="five" name="userInput" value=5><label for="five">5</label></div>
+    <div class="radio"><input type="radio" id="six" name="userInput" value=6><label for="six">6</label></div>
   `;
   const forward = `
         </div>
-        <div class="col-1 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
+        <div class="col-2 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
+        <div class="col-12"><p id="alert"></p></div>
       </div>
     </div>
   `;
@@ -49,30 +48,18 @@ const game = (x,y) => {
     $("#notepad").append(`
       ${backward}
         <label for="userInput">How many people are playing?</label>
-        <select id="userInput" >
-          <option value="2">2</option>
-          <option value="3" selected="selected">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
+        ${playerCount}
       ${forward}
     `);  
   } else if (x >= 2 && x <= 6 ) {
     $("#notepad").append(`
       ${backward}
-        <label for="userInput">Which color is player ${x}?</label>
+        <label for="color">Which color is player ${x}?</label>
         ${colors}
       ${forward}
     `);  
   }
-  $("#userInput").keyup(e => {
-    if (e.keyCode===13) {
-      e.preventDefault();
-      $("#qBtn").click();
-    }
-  });
-  setTimeout(() => $("#userInput").focus(), 1000);
+  q===0 ? $("#backBtn").addClass("hidden") : null;
 }
 
 const goBack = x => {
@@ -83,7 +70,7 @@ const goBack = x => {
 
 const goForward = () => {
   q += 1;
-  console.log(q);
+  console.log(players);
   $(".questionaire").addClass("animate__fadeOutLeftBig");
   setTimeout(() => {
     game(q, "Right");
@@ -91,9 +78,9 @@ const goForward = () => {
 }
 
 const questions = (num, input) => {
-  const data = $("#"+input).val();
+  const data = $("input[name='userInput']:checked").val();
+  console.log(q, count);
   const valid = players.indexOf(data);
-  console.log(valid);
   if (valid === -1) {
     switch (num) {
       case 0:
@@ -127,7 +114,12 @@ const questions = (num, input) => {
       default:
         null;
     };
-  } else null;
+  } else {
+    $("#alert").html(`
+      <hr>
+      Sorry, you assigned ${data} to player ${valid+1}
+    `)
+  };
 };
 
 const loadNotepad = () => {
