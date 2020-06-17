@@ -5,11 +5,11 @@
   --main-tan: #af9272;
   --main-white: #ebe1dc;
   --main-mustard: #cbae45;
-  --main-plum: #4b2b50;
+  --main-plum: #71399a;
   --main-mrgreen: #7a9358;
   --main-peacock: #595f89;
   --main-scarlet: #a8483a;
-  --main-white: #e6dfd5;
+  --main-mswhite: #ccccca;
 }
 
 body {
@@ -67,6 +67,12 @@ div.container {
   width: 90%;
 }
 
+.radio {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .questionaire input {
   border: 2px solid black;
   outline: none;
@@ -93,7 +99,6 @@ table {
 td {
   vertical-align: middle;
   text-align: center;
-  padding: 4px;
   border: 2px solid var(--main-tan);
   color: var(--main-tan);
   font-family: 'Sedgwick Ave', cursive;
@@ -135,28 +140,40 @@ td button {
   max-width: 100%;
 }
 
+.notepadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mustard {
   border: 3px outset var(--main-mustard);
+  color: var(--main-mustard);
 }
 
 .plum {
   border: 3px outset var(--main-plum);
+  color: var(--main-plum);
 }
 
 .green {
   border: 3px outset var(--main-mrgreen);
+  color: var(--main-mrgreen);
 }
 
 .peacock {
   border: 3px outset var(--main-peacock);
+  color: var(--main-peacock);
 }
 
 .scarlet {
   border: 3px outset var(--main-scarlet);
+  color: var(--main-scarlet);
 }
 
 .white {
-  border: 3px outset var(--main-white);
+  border: 3px outset var(--main-mswhite);
+  color: var(--main-mswhite);
 }
 
 .mustard:active, .plum:active, .green:active,

@@ -1,10 +1,7 @@
 const players = ["","","","","",""];
-let playerOne = "";
-let playerTwo = "";
-let playerThree = "";
-let playerFour = "";
-let playerFive = "";
-let playerSix = "";
+const check = '<i class="fas fa-check"></i>';
+const question = '<i class="fas fa-question"></i>';
+const look = '<i class="fas fa-eye"></i>';
 let count = 0;
 let q = 0;
 
@@ -15,6 +12,14 @@ const game = (x,y) => {
         <div class="col-1 center"><button onClick="goBack()"><i class="fas fa-backward"></i></button></div>
         <div class="col-10 center text-center">
   `;
+  // const colors = `
+  //   <div class="radio"><input type="radio" id="mustard" name="userInput" value="mustard"><label for="mustard">Mustard</label></div>
+  //   <div class="radio"><input type="radio" id="plum" name="userInput" value="plum"><label for="plum">Plum</label></div>
+  //   <div class="radio"><input type="radio" id="green" name="userInput" value="green"><label for="green">Green</label></div>
+  //   <div class="radio"><input type="radio" id="peacock" name="userInput" value="peacock"><label for="peacock">Peacock</label></div>
+  //   <div class="radio"><input type="radio" id="scarlet" name="userInput" value="scarlet"><label for="scarlet">Scarlet</label></div>
+  //   <div class="radio"><input type="radio" id="white" name="userInput" value="white"><label for="white">White</label></div>
+  // `;
   const colors = `
     <select id="userInput">
       <option value="mustard">Mustard</option>
@@ -129,7 +134,7 @@ const loadNotepad = () => {
   console.log(players);
   $("#notepad").empty();
   $("#notepad").append(`
-    <div class="notepad-container">
+    <div class="notepad-container  animate__animated animate__fadeInUpBig">
       <table>
         <tr>
           <td colspan="100%" class="heading">SUSPECTS</td>
@@ -256,7 +261,26 @@ const loadNotepad = () => {
     $("#library").append(`<td><button id="library${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
     $("#study").append(`<td><button id="study${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
   };
-  
+  $(".notepadBtn").bind("click", function() {
+    let x = parseInt($(this).val());
+    console.log(x);
+    x === 3 ? x = 0 : x+=1;
+    $(this).val(x);
+    switch (x) {
+      case 0:
+        $(this).html("");
+        break;
+      case 1:
+        $(this).html(check);
+        break;
+      case 2:
+        $(this).html(look);
+        break;
+      case 3:
+        $(this).html(question);
+        break;
+    }
+  })
 }
 
 game(0,"Right"); 
