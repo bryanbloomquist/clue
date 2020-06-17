@@ -6,7 +6,6 @@ let count = 0; //variable to set number of players
 let q = 0; //variable to track which question to ask
 
 const game = (x,y) => {
-  //dynamic html variables to be written to the page
   const backward = ` 
     <div class="questionaire animate__animated animate__fadeIn${y}Big">
       <div class="row">
@@ -36,7 +35,7 @@ const game = (x,y) => {
     </div>
   `;
   $("#notepad").empty();
-    if (x===0) {
+  if (x===0) {
     $("#notepad").addClass("center");
     $("#notepad").append(`
       ${backward}
@@ -70,7 +69,6 @@ const goBack = x => {
 
 const goForward = () => {
   q += 1;
-  console.log(players);
   $(".questionaire").addClass("animate__fadeOutLeftBig");
   setTimeout(() => {
     game(q, "Right");
@@ -79,7 +77,6 @@ const goForward = () => {
 
 const questions = (num, input) => {
   const data = $("input[name='userInput']:checked").val();
-  console.log(q, count);
   const valid = players.indexOf(data);
   if (valid === -1) {
     switch (num) {
@@ -123,7 +120,6 @@ const questions = (num, input) => {
 };
 
 const loadNotepad = () => {
-  console.log(players);
   $("#notepad").empty();
   $("#notepad").append(`
     <div class="notepad-container  animate__animated animate__fadeInUpBig">
@@ -255,7 +251,6 @@ const loadNotepad = () => {
   };
   $(".notepadBtn").bind("click", function() {
     let x = parseInt($(this).val());
-    console.log(x);
     x === 3 ? x = 0 : x+=1;
     $(this).val(x);
     switch (x) {
@@ -272,7 +267,22 @@ const loadNotepad = () => {
         $(this).html(question);
         break;
     }
-  })
+  });
+  $("td:first-child").bind("click", function() {
+    const parent = $(this).parent();
+    const name = parent[0].id;
+    let image = ""
+    console.log(name);
+    for (let i=0; i<cards.length; i++) {
+      if (name === cards[i].name) {
+        image = cards[i].image;
+      }
+    }
+    $("#cardDisplay").removeClass("hidden").html(`<img src="${image}" alt=${name} id="bigCard"/>`)
+    $("#bigCard").on("click", function() {
+      $("#cardDisplay").addClass("hidden");
+    })
+  });
 }
 
 game(0,"Right"); 

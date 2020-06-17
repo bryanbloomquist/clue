@@ -219,3 +219,33 @@ td button {
 .peacock:active, .scarlet:active, .white:active {
   border-style: inset;
 }
+
+#cardDisplay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background-image: url("/assets/images/background-2.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+
+#cardDisplay img {
+  height: 80%;
+  display: block;
+  margin: 0 auto;
+}
+@media screen and (max-width: 768px) {
+  #cardDisplay img {
+    height: auto;
+    width: 75%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #cardDisplay img {
+    width: 100%;
+  }
+}
