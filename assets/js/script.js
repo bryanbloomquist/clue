@@ -119,14 +119,14 @@ const loadNotepad = () => {
   $("#notepad").append(`
     <div class="notepad-container  animate__animated animate__fadeInUpBig">
       <table>
-        <tr><td colspan="100%" class="heading">SUSPECTS</td></tr>
+        <tr><td colspan="100%" class="heading"><div class="circle center">SUSPECTS</div></td></tr>
         <tr id="mustard"><td>Col. Mustard</td></tr>
         <tr id="plum"><td>Prof. Plum</td></tr>
         <tr id="green"><td>Mr. Green</td></tr>
         <tr id="peacock"><td>Mrs. Peacock</td></tr>
         <tr id="scarlet"><td>Miss Scarlet</td></tr>
         <tr id="white"><td>Mrs. White</td></tr>
-        <tr><td colspan="100%" class="heading">WEAPONS</td></tr>
+        <tr><td colspan="100%" class="heading"><div class="circle center">WEAPONS</div></td></tr>
         <tr id="knife"><td>Knife</td></tr>
         <tr id="candlestick"><td>Candlestick</td></tr>
         <tr id="revolver"><td>Revolver</td></tr>
@@ -134,7 +134,7 @@ const loadNotepad = () => {
         <tr id="leadpipe"><td>Lead Pipe</td></tr>
         <tr id="wrench"><td>Wrench</td></tr>
         <tr><td colspan=100%" class="binding p-0"></td></tr>
-        <tr><td colspan="100%" class="heading">ROOMS</td></tr>
+        <tr><td colspan="100%" class="heading"><div class="circle center">ROOMS</div></td></tr>
         <tr id="hall"><td>Hall</td></tr>
         <tr id="lounge"><td>Lounge</td></tr>
         <tr id="diningroom"><td>Dining Room</td></tr>

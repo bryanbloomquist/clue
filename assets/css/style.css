@@ -161,10 +161,18 @@ td.heading {
   font-family: 'Rakkas', cursive;
   font-size: 1.5rem;
   font-style: normal;
+  padding: 0 8px;
 }
 
 td.heading, td.binding, td.notepad-foot {
   border: none;
+}
+
+.circle {
+  border: 1.5px solid var(--main-tan);
+  border-radius: 12px;
+  margin: 4px 0;
+  width: 100%;
 }
 
 td button {
