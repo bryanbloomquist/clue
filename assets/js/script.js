@@ -1,16 +1,29 @@
-const players = ["","","","","",""];  //array to assign players colors
-const check = '<i class="fas fa-check"></i>'; //font awesome check mark
-const question = '<i class="fas fa-question"></i>'; //font awesome question mark
-const look = '<i class="fas fa-eye"></i>'; //font awesome eyeball
-let count = 0; //variable to set number of players
-let q = 0; //variable to track which question to ask
+const players = ["","","","","",""];
+const check = '<i class="fas fa-check"></i>';
+const questionmark = '<i class="fas fa-question"></i>';
+const look = '<i class="fas fa-eye"></i>';
+let question = "";
+let count = 0;
+let q = 0;
 
 const game = (x,y) => {
+  switch (x) {
+    case 0: 
+      question = "Which color are you?"; 
+      break;
+    case 1: 
+      question = "How many players?"; 
+      break;
+    default: 
+      question = `Which color is player ${x}`; 
+      break;
+  }
   const backward = ` 
     <div class="questionaire animate__animated animate__fadeIn${y}Big">
       <div class="row">
-        <div class="col-2 center"><button onClick="goBack()" id="backBtn"><i class="fas fa-backward"></i></button></div>
-        <div class="col-8 center text-center">
+        <div class="text-center w-100"><label for="userInput">${question}</label></div>
+        <div class="col-1 center"><button onClick="goBack()" id="backBtn"><i class="fas fa-backward"></i></button></div>
+        <div class="col-10 center text-center">
   `;
   const colors = `
     <div class="radio"><input type="radio" id="mustard" name="userInput" value="mustard"><label for="mustard">Mustard</label></div>
@@ -29,36 +42,21 @@ const game = (x,y) => {
   `;
   const forward = `
         </div>
-        <div class="col-2 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
+        <div class="col-1 center"><button id="qBtn" onClick="questions(${x}, 'userInput')"><i class="fas fa-forward"></i></button></div>
         <div class="col-12"><p id="alert"></p></div>
       </div>
     </div>
   `;
   $("#notepad").empty();
   if (x===0) {
-    $("#notepad").addClass("center");
-    $("#notepad").append(`
-      ${backward}
-        <label for="userInput">Which color are you?</label>
-        ${colors}
-      ${forward}
-    `);
+    question = "Which color are you?"
+    $("#notepad").append(`${backward}${colors}${forward}`);
+    $("#backBtn").addClass("hidden");
   } else if (x===1) {
-    $("#notepad").append(`
-      ${backward}
-        <label for="userInput">How many people are playing?</label>
-        ${playerCount}
-      ${forward}
-    `);  
+    $("#notepad").append(`${backward}${playerCount}${forward}`);  
   } else if (x >= 2 && x <= 6 ) {
-    $("#notepad").append(`
-      ${backward}
-        <label for="color">Which color is player ${x}?</label>
-        ${colors}
-      ${forward}
-    `);  
+    $("#notepad").append(`${backward}${colors}${forward}`);  
   }
-  q===0 ? $("#backBtn").addClass("hidden") : null;
 }
 
 const goBack = x => {
@@ -112,10 +110,7 @@ const questions = (num, input) => {
         null;
     };
   } else {
-    $("#alert").html(`
-      <hr>
-      Sorry, you assigned ${data} to player ${valid+1}
-    `)
+    $("#alert").html(`<hr>Sorry, you assigned ${data} to player ${valid+1}`)
   };
 };
 
@@ -124,132 +119,60 @@ const loadNotepad = () => {
   $("#notepad").append(`
     <div class="notepad-container  animate__animated animate__fadeInUpBig">
       <table>
-        <tr>
-          <td colspan="100%" class="heading">SUSPECTS</td>
-        </tr>
-        <tr id="mustard">
-          <td>Col. Mustard</td>
-          <td><button id="mustard0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="plum">
-          <td>Prof. Plum</td>
-          <td><button id="plum0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="green">
-          <td>Mr. Green</td>
-          <td><button id="green0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="peacock">
-          <td>Mrs. Peacock</td>
-          <td><button id="peacock0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="scarlet">
-          <td>Miss Scarlet</td>
-          <td><button id="scarlet0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="white">
-          <td>Mrs. White</td>
-          <td><button id="white0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr>
-          <td colspan="100%" class="heading">WEAPONS</td>
-        </tr>
-        <tr id="knife">
-          <td>Knife</td>
-          <td><button id="knife0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="candlestick">
-          <td>Candlestick</td>
-          <td><button id="candlestick0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="revolver">
-          <td>Revolver</td>
-          <td><button id="revolver0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="rope">
-          <td>Rope</td>
-          <td><button id="rope0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="leadpipe">
-          <td>Lead Pipe</td>
-          <td><button id="leadpipe0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="wrench">
-          <td>Wrench</td>
-          <td><button id="wrench0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr>
-          <td colspan=100%" class="binding p-0"></td>
-        </tr>
-        <tr>
-          <td colspan="100%" class="heading">ROOMS</td>
-        </tr>
-        <tr id="hall">
-          <td>Hall</td>
-          <td><button id="hall0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="lounge">
-          <td>Lounge</td>
-          <td><button id="lounge0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="diningroom">
-          <td>Dining Room</td>
-          <td><button id="diningroom0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="kitchen">
-          <td>Kitchen</td>
-          <td><button id="kitchen0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="ballroom">
-          <td>Ball Room</td>
-          <td><button id="ballroom0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="conservatory">
-          <td>Conservatory</td>
-          <td><button id="conservatory0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="billiardroom">
-          <td>Billiard Room</td>
-          <td><button id="billiardroom0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="library">
-          <td>Library</td>
-          <td><button id="library0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr id="study">
-          <td>Study</td>
-          <td><button id="study0" class="notepadBtn ${players[0]}" value=0></button></td>
-        </tr>
-        <tr>
-          <td colspan="100%" class="notepad-foot p-0"></td>
-        </tr>
+        <tr><td colspan="100%" class="heading">SUSPECTS</td></tr>
+        <tr id="mustard"><td>Col. Mustard</td></tr>
+        <tr id="plum"><td>Prof. Plum</td></tr>
+        <tr id="green"><td>Mr. Green</td></tr>
+        <tr id="peacock"><td>Mrs. Peacock</td></tr>
+        <tr id="scarlet"><td>Miss Scarlet</td></tr>
+        <tr id="white"><td>Mrs. White</td></tr>
+        <tr><td colspan="100%" class="heading">WEAPONS</td></tr>
+        <tr id="knife"><td>Knife</td></tr>
+        <tr id="candlestick"><td>Candlestick</td></tr>
+        <tr id="revolver"><td>Revolver</td></tr>
+        <tr id="rope"><td>Rope</td></tr>
+        <tr id="leadpipe"><td>Lead Pipe</td></tr>
+        <tr id="wrench"><td>Wrench</td></tr>
+        <tr><td colspan=100%" class="binding p-0"></td></tr>
+        <tr><td colspan="100%" class="heading">ROOMS</td></tr>
+        <tr id="hall"><td>Hall</td></tr>
+        <tr id="lounge"><td>Lounge</td></tr>
+        <tr id="diningroom"><td>Dining Room</td></tr>
+        <tr id="kitchen"><td>Kitchen</td></tr>
+        <tr id="ballroom"><td>Ball Room</td></tr>
+        <tr id="conservatory"><td>Conservatory</td></tr>
+        <tr id="billiardroom"><td>Billiard Room</td></tr>
+        <tr id="library"><td>Library</td></tr>
+        <tr id="study"><td>Study</td></tr>
+        <tr><td colspan="100%" class="notepad-foot p-0"></td></tr>
       </table>
     </div>
   `);
-  for (let i=1; i<count; i++) {
-    $("#mustard").append(`<td><button id="mustard${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#plum").append(`<td><button id="plum${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#green").append(`<td><button id="green${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#peacock").append(`<td><button id="peacock${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#scarlet").append(`<td><button id="scarlet${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#white").append(`<td><button id="white${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#knife").append(`<td><button id="knife${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#candlestick").append(`<td><button id="candlestick${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#revolver").append(`<td><button id="revolver${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#rope").append(`<td><button id="rope${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#leadpipe").append(`<td><button id="leadpipe${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#wrench").append(`<td><button id="wrench${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#hall").append(`<td><button id="hall${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#lounge").append(`<td><button id="lounge${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#diningroom").append(`<td><button id="diningroom${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#kitchen").append(`<td><button id="kitchen${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#ballroom").append(`<td><button id="ballroom${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#conservatory").append(`<td><button id="conservatory${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#billiardroom").append(`<td><button id="billiardroom${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#library").append(`<td><button id="library${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
-    $("#study").append(`<td><button id="study${i}" class="notepadBtn ${players[i]}" value=0></button></td>`)
+  for (let i=0; i<count; i++) {
+    const color = players[i]
+    $("#mustard").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#plum").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#green").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#peacock").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#scarlet").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#white").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#knife").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#candlestick").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#revolver").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#rope").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#leadpipe").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#wrench").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#hall").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#lounge").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#diningroom").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#kitchen").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#ballroom").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#conservatory").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#billiardroom").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#library").append(`<td><button class="${color}" value=0></button></td>`);
+    $("#study").append(`<td><button class="${color}" value=0></button></td>`);
   };
-  $(".notepadBtn").bind("click", function() {
+  $("td button").bind("click", function() {
     let x = parseInt($(this).val());
     x === 3 ? x = 0 : x+=1;
     $(this).val(x);
@@ -264,26 +187,24 @@ const loadNotepad = () => {
         $(this).html(look);
         break;
       case 3:
-        $(this).html(question);
+        $(this).html(questionmark);
         break;
     }
   });
-  $("td:first-child").bind("click", function() {
+  $("td:first-child:not('.heading'):not('.binding'):not('.notepad-foot')").bind("click", function() {
     const parent = $(this).parent();
     const name = parent[0].id;
     let image = ""
     console.log(name);
     for (let i=0; i<cards.length; i++) {
-      if (name === cards[i].name) {
-        image = cards[i].image;
-      }
+      (name === cards[i].name) ? image = cards[i].image : null;
     }
-    $("#cardDisplay").removeClass("upTop").addClass("downLow").html(`<img src="${image}" alt=${name} id="bigCard"/>`)
-    $("#notepad").addClass("upTop");
-    $("#bigCard").on("click", function() {
+    $("#cardDisplay").removeClass("upTop").addClass("downLow").html(`<img src="${image}" alt=${name} id="bigCard"/>`);
+    $(".notepad-container").css("filter", "blur(4px)");
+    $("#bigCard").on("click", () => {
       $("#cardDisplay").removeClass("downLow").addClass("upTop");
-      $("#notepad").removeClass("upTop");
-    })
+      $(".notepad-container").css("filter", "blur(0)");
+    });
   });
 }
 

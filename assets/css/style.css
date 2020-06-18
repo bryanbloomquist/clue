@@ -120,16 +120,13 @@ label[for="white"] {
   text-transform: uppercase;
 }
 
-#notepad {
-  transition: all 1s;
-}
-
 .notepad-container {
   transition: all 1s;
   padding: 24px;
   background-image: url("/assets/images/notepad.png");
   background-size: contain;
   background-repeat: repeat-y;
+  margin: 24px 0;
 }
 
 table {
@@ -139,7 +136,8 @@ table {
 td {
   vertical-align: middle;
   text-align: center;
-  border: 2px solid var(--main-tan);
+  border-top: 2px solid var(--main-tan);
+  border-bottom: 2px solid var(--main-tan);
   color: var(--main-tan);
   font-family: 'Sedgwick Ave', cursive;
   font-size: 1.25rem;
@@ -147,8 +145,16 @@ td {
   font-weight: 600;
 }
 
+td:not(:first-child):not(:last-child) {
+  border-right: 2px solid var(--main-tan);
+}
+
 td:first-child {
-  padding: 0 12px;
+  padding: 0 16px;
+}
+
+td:first-child:not(.heading):not(.binding):not(.notepad-foot) {
+  cursor: pointer;
 }
 
 td.heading {
@@ -157,13 +163,14 @@ td.heading {
   font-style: normal;
 }
 
-td.binding, td.notepad-foot {
+td.heading, td.binding, td.notepad-foot {
   border: none;
 }
 
 td button {
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
 }
@@ -182,12 +189,6 @@ td button {
   height: 160px;
   border: none;
   max-width: 100%;
-}
-
-.notepadBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .mustard {
@@ -225,37 +226,39 @@ td button {
   border-style: inset;
 }
 
-.upTop, .downLow {
+.upTop {
   transition: all 1s;
   position: absolute;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-.upTop {
+  top: -100%;
+  left: 50%;
   opacity: 0;
-  top: -200%;
+  height: 0vh;
+  width: 0vw;
 }
 
 .downLow {
-  position: fixed;
+  transition: all 1s;
+  position: fixed; 
   top: 0;
+  left: 0;
   opacity: 1;
+  height: 100vh;
+  width: 100vw;
 }
-
 
 #cardDisplay img {
   height: 80%;
   display: block;
   margin: 0 auto;
 }
+
 @media screen and (max-width: 768px) {
   #cardDisplay img {
     height: auto;
     width: 75%;
   }
 }
+
 @media screen and (max-width: 600px) {
   #cardDisplay img {
     width: 100%;
