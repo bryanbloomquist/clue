@@ -120,7 +120,12 @@ label[for="white"] {
   text-transform: uppercase;
 }
 
+#notepad {
+  transition: all 1s;
+}
+
 .notepad-container {
+  transition: all 1s;
   padding: 24px;
   background-image: url("/assets/images/notepad.png");
   background-size: contain;
@@ -220,16 +225,23 @@ td button {
   border-style: inset;
 }
 
-#cardDisplay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-background-image: url("/assets/images/background-2.jpg");
-background-size: cover;
-background-repeat: no-repeat;
-background-attachment: fixed;
+.upTop, .downLow {
+  transition: all 1s;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.upTop {
+  opacity: 0;
+  top: -200%;
+}
+
+.downLow {
+  position: fixed;
+  top: 0;
+  opacity: 1;
 }
 
 

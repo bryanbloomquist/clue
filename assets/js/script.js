@@ -278,9 +278,11 @@ const loadNotepad = () => {
         image = cards[i].image;
       }
     }
-    $("#cardDisplay").removeClass("hidden").html(`<img src="${image}" alt=${name} id="bigCard"/>`)
+    $("#cardDisplay").removeClass("upTop").addClass("downLow").html(`<img src="${image}" alt=${name} id="bigCard"/>`)
+    $("#notepad").addClass("upTop");
     $("#bigCard").on("click", function() {
-      $("#cardDisplay").addClass("hidden");
+      $("#cardDisplay").removeClass("downLow").addClass("upTop");
+      $("#notepad").removeClass("upTop");
     })
   });
 }
